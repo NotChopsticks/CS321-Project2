@@ -1,4 +1,5 @@
-package PACKAGE_NAME;
-
 public enum WeaponArchetype {
+    Long,
+    Medium,
+    Short
 }
