@@ -12,23 +12,23 @@ public class WeaponFactory {
         Random rand = new Random();
 
         switch(archetype) {
-            case short_weapon:
+            case Short:
                 weaponNo = rand.nextInt(2);
                 Weapon shortWeapon = new Weapon(WeaponArchetype.short_weapon, ratings[0][weaponNo], ratings[1][weaponNo]);
                 return shortWeapon;
-            case medium_weapon:
+            case Medium:
                 int low = 3;
                 int high = 5;
                 weaponNo = rand.nextInt(high-low) + low;
                 Weapon mediumWeapon = new Weapon(WeaponArchetype.medium_weapon, ratings[0][weaponNo], ratings[1][weaponNo]);
                 return mediumWeapon;
-            case long_weapon:
+            case Long:
                 low = 5;
                 high = 8;
                 weaponNo = rand.nextInt(high-low) + low;
                 Weapon longWeapon = new Weapon(WeaponArchetype.long_weapon, ratings[0][weaponNo], ratings[1][weaponNo]);
                 return longWeapon;
-            case wild:
+            case Wild:
                 low = 0;
                 high = 8;
                 weaponNo = rand.nextInt(high-low) + low;

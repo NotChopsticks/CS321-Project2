@@ -11,7 +11,7 @@ public class Match {
 
     public void PlayMatch()
     {
-        // These are the function calls that will be used every combat turn to get the
+        // These are the function calls that will be used in every combat turn to get the
         // attack and defense performances for each fighter.
         // Figured I'd include these cause they're long and there's a lot of 
         // parentheses.
