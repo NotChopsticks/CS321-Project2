@@ -1,5 +1,7 @@
 public enum WeaponArchetype {
-    Long,
-    Medium,
-    Short
+
+    short_weapon,
+    medium_weapon,
+    long_weapon
+
 }
