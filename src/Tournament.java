@@ -14,8 +14,12 @@ public class Tournament {
 
     }
 
-    public void InitializeTournament() {
-
+    public void InitializeTournament(int rounds) {
+        for (TournamentArchetype type : TournamentArchetype.values()){
+            SubTournament temp = new SubTournament(rounds, type);
+            //temp.archetype = type;
+            subTournaments.add(temp); //TODO:
+        }
     }
 
 }
