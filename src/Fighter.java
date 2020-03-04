@@ -1,3 +1,5 @@
+import java.util.Random;
+
 public class Fighter {
     public int strength;
     public int reach;
@@ -5,24 +7,82 @@ public class Fighter {
     public Weapon weapon;
     public String name;
 
-    public Fighter(){
+    public Fighter()
+    {
 
     }
 
-    // all just placeholders
-    public boolean strongerThan(){
-        return true;
+    public Fighter(int str, int rch, int spd, Weapon weap, String nm)
+    {
+        strength = str;
+        reach = rch;
+        speed = spd;
+        weapon = weap;
+        name = nm;
     }
-    public boolean longerReachThan(){
-        return true;
+
+    
+    public boolean strongerThan(int str)
+    {
+        boolean st = false;
+
+        if(strength > str)
+            st = true;
+
+        return st;
     }
-    public boolean fasterThan(){
-        return true;
+    public boolean longerReachThan(int rch)
+    {
+        boolean lrt = false;
+
+        if(reach > rch)
+            lrt = true;
+
+        return lrt;
     }
-    public int getAttackPerformance(){
-        return strength;
+    public boolean fasterThan(int spd)
+    {
+        boolean ft = false;
+
+        if(speed > spd)
+            ft = true;
+
+        return ft;
     }
-    public int getDefensePerformance(){
-        return speed;
+    public int getAttackPerformance(boolean st, boolean ft)
+    {
+        int performance = 0;
+        Random rand = new Random();
+        
+        for(int i = 0; i < weapon.attackRating; i++)
+        {
+            performance += rand.nextInt(6);
+        }
+        
+        if(st == true)
+            performance++;
+
+        if(ft == true)
+            performance++;
+
+        return performance;
+    }
+    public int getDefensePerformance(boolean lrt, boolean ft)
+    {
+        int performance = 0;
+        Random rand = new Random();
+
+        for(int i = 0; i < weapon.defenseRating; i++)
+        {
+            performance += rand.nextInt(6);
+        }
+
+        if(lrt == true)
+            performance++;
+
+        if(ft == true)
+            performance++;
+
+        return performance;
     }
 }
