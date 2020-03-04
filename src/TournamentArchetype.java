@@ -1,1 +1,6 @@
-enum TournamentArchetype {long_weapon, medium_weapon, short_weapon, wild};
+enum TournamentArchetype {
+    Long,
+    Medium,
+    Short,
+    Wild
+};
