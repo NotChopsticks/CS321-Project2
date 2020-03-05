@@ -22,52 +22,39 @@ public class Fighter {
     }
 
     
-    public boolean strongerThan(int str)
+    public boolean strongerThan(Fighter opponent)
     {
-        boolean st = false;
-
-        if(strength > str)
-            st = true;
-
-        return st;
+        return strength > opponent.strength;
     }
-    public boolean longerReachThan(int rch)
+
+    public boolean longerReachThan(Fighter opponent)
     {
-        boolean lrt = false;
-
-        if(reach > rch)
-            lrt = true;
-
-        return lrt;
+        return reach > opponent.reach;
     }
-    public boolean fasterThan(int spd)
+
+    public boolean fasterThan(Fighter opponent)
     {
-        boolean ft = false;
-
-        if(speed > spd)
-            ft = true;
-
-        return ft;
+        return speed > opponent.speed;
     }
-    public int getAttackPerformance(boolean st, boolean ft)
+    public int getAttackPerformance(Fighter opponent)
     {
         int performance = 0;
         Random rand = new Random();
         
         for(int i = 0; i < weapon.attackRating; i++)
         {
-            performance += rand.nextInt(6);
+            performance += rand.nextInt(6)+1;
         }
         
-        if(st == true)
+        if(strongerThan(opponent)) {
             performance++;
-
-        if(ft == true)
+        }
+        if(opponent.weapon.archetype != weapon.archetype && fasterThan(opponent)) {
             performance++;
-
+        }
         return performance;
     }
-    public int getDefensePerformance(boolean lrt, boolean ft)
+    public int getDefensePerformance(Fighter opponent)
     {
         int performance = 0;
         Random rand = new Random();
@@ -77,12 +64,12 @@ public class Fighter {
             performance += rand.nextInt(6);
         }
 
-        if(lrt == true)
+        if(longerReachThan(opponent)) {
             performance++;
-
-        if(ft == true)
+        }
+        if(opponent.weapon.archetype != weapon.archetype && fasterThan(opponent)) {
             performance++;
-
+        }
         return performance;
     }
 }

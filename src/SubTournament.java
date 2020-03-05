@@ -9,6 +9,7 @@ public class SubTournament {
     List<Fighter> combatants;
     Fighter winner;
     Random matchMaker = new Random();
+    Random statGenerator = new Random();
     int totalRounds;
     WeaponFactory factory;
 
@@ -21,11 +22,17 @@ public class SubTournament {
         totalRounds = rounds;
         double totalCombatants = Math.pow(2, rounds);
         for (int i = 0; i < totalCombatants; i++) {
-            Fighter temp = new Fighter(); //TODO: Change this to work as a parameterized constructor passing in the weapon archetype
+            int str = statGenerator.nextInt(10)+1;
+            int rch = statGenerator.nextInt(10)+1;
+            int spd = statGenerator.nextInt(10)+1;
+            Weapon newWeap = factory.makeWeapon(type);
+            String newName = "Fighter " + i;
+            Fighter temp = new Fighter(str, rch, spd, newWeap, newName); //TODO: Change this to work as a parameterized constructor passing in the weapon archetype
             combatants.add(temp);
         }
         int index = 0;
 
+        //TODO: Possibly take out the randomized matching since the fighters are already randomly generated
         for (int j = 0; j < totalCombatants/2; j++){
             index = matchMaker.nextInt(combatants.size());
             Fighter f1 = combatants.get(index);

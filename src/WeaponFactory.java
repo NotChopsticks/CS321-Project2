@@ -8,8 +8,8 @@ public class WeaponFactory {
 
 
     //private int[][] ratings = {{3,0},{1,2},{2,2},{1,3},{3,2},{3,1},{4,1},{5,0},{3,3}};
-    Map<String, Integer> atkRatings = new HashMap<String, Integer>();
-    Map<String, Integer> defRatings = new HashMap<String, Integer>();
+    private Map<String, Integer> atkRatings = new HashMap<String, Integer>();
+    private Map<String, Integer> defRatings = new HashMap<String, Integer>();
     private String[] longWeapons = {"Halberd", "Lance", "Two-Handed Sword"};
     private String[] medWeapons = {"Staff", "Hand-and-a-half Sword", "Rapier"};
     private String[] shortWeapons = {"Dagger", "Cestus", "Gladius"};
