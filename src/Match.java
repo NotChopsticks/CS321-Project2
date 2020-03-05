@@ -3,10 +3,12 @@ public class Match {
     Fighter fighter1;
     Fighter fighter2;
     Jester jester;
+    Fighter winner;
 
-    public Match()
+    public Match(Fighter f1, Fighter f2)
     {
-       
+       fighter1 = f1;
+       fighter2 = f2;
     }
 
     public void PlayMatch()

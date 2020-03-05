@@ -10,6 +10,7 @@ public class SubTournament {
     Fighter winner;
     Random matchMaker = new Random();
     int totalRounds;
+    WeaponFactory factory;
 
 
     public SubTournament() {
