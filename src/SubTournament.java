@@ -34,7 +34,7 @@ public class SubTournament {
             int rch = statGenerator.nextInt(10)+1;
             int spd = statGenerator.nextInt(10)+1;
             Weapon newWeap = factory.makeWeapon(type);
-            String newName = "Fighter " + (idGen.nextInt(99)+1); //TODO: Add actual random names
+            String newName = "Fighter-" + (idGen.nextInt(99)+1); //TODO: Add actual random names
             Fighter temp = new Fighter(str, rch, spd, newWeap, newName);
             combatants.add(temp);
         }
@@ -64,6 +64,7 @@ public class SubTournament {
         */
         currentRound = 1;
         String tournamentType = getTournamentType();
+        boolean last = false;
         //for (int i = totalRounds; i > 0; i--)
 
         while(true){
@@ -73,7 +74,7 @@ public class SubTournament {
             int roundSize = matches.size();
             for (int j = 0; j < roundSize; j++) {
                 System.out.println("\nMatch " + (j+1) + ": " + matches.get(0).fighter1.name + " Vs. " + matches.get(0).fighter2.name);
-                matches.get(0).PlayMatch(false);  //
+                matches.get(0).PlayMatch(last);  //
                 combatants.add(matches.get(0).winner);
                 System.out.println(matches.get(0).winner.name + " wins match " + (j+1));
                 System.out.println("Press Enter to continue");
@@ -83,7 +84,9 @@ public class SubTournament {
             }
             int remainingCombatants = combatants.size();
             if (remainingCombatants > 1) {
-
+                if (remainingCombatants == 2){
+                    last = true;
+                }
                 for (int j = 0; j < remainingCombatants / 2; j++) {
                     Fighter f1 = combatants.get(0);
                     Fighter f2 = combatants.get(1);

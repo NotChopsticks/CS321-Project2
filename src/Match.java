@@ -34,6 +34,7 @@ public class Match {
         boolean f1HalfHealth = false;
         boolean f2HalfHealth = false;
         boolean tieStated = false;
+        jester = new Jester();
         
         jester.CommentOnStart(expected); 
 
@@ -61,13 +62,13 @@ public class Match {
             System.out.println(fighter1.name + " Remaining Health: " + f1Health);
             System.out.println(fighter2.name + " Remaining Health: " + f2Health);
 
-            if(f2Health <= 5 && !f1HalfHealth){
-                SignalMiddleToJester(fighter2);
-                f2HalfHealth = true;
-            }
-            else if(f1Health <= 5 && !f2HalfHealth){
+            if(f1Health <= 5 && !f1HalfHealth){
                 SignalMiddleToJester(fighter1);
                 f1HalfHealth = true;
+            }
+            else if(f2Health <= 5 && !f2HalfHealth){
+                SignalMiddleToJester(fighter2);
+                f2HalfHealth = true;
             }
 
 

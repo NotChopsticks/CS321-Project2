@@ -49,7 +49,7 @@ public class Jester {
 
     public void CommentOnEnd(Fighter winner, Fighter expected, boolean last) {
         if(winner == expected) {
-            if(last == true) {
+            if(last) {
                 Random rand = new Random();
                 int response;
                 response = rand.nextInt(4);
@@ -91,7 +91,7 @@ public class Jester {
             }
         }
         else{
-            if(last == true){
+            if(last){
                 Random rand = new Random();
                 int response;
                 response = rand.nextInt(2);
@@ -112,7 +112,7 @@ public class Jester {
                 
                 switch(response) {
                 case 1:
-                System.out.println("AMAZING! WHAT AN UPSET! " + winner.name + " HAS WON!" + winner.name + "GOES ON TO THE NEXT ROUND!");
+                System.out.println("AMAZING! WHAT AN UPSET! " + winner.name + " HAS WON! " + winner.name + " GOES ON TO THE NEXT ROUND!");
                 break;
                 case 2:
                 System.out.println("Holy cow! " + winner.name + " actually won! C'mon, dude, you're making me look bad!");
