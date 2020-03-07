@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class Tournament {
 
-    List<SubTournament> subTournaments;
+    List<SubTournament> subTournaments = new ArrayList<>();
     Random matchMaker = new Random();
     Fighter winner = null;
 

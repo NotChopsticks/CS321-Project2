@@ -28,8 +28,14 @@ public class Match {
         int f2Health = 10;
         boolean f1HalfHealth = false;
         boolean f2HalfHealth = false;
+        boolean tieStated = false;
 
         while(true) {
+            if (!tieStated && tieCount > 0){
+                System.out.println("Run " + (tieCount+1));
+                tieStated = true;
+            }
+
             roundCount++;
             int f1Atk = fighter1.getAttackPerformance(fighter2);
             int f2Atk = fighter2.getAttackPerformance(fighter1);
@@ -42,9 +48,11 @@ public class Match {
             f2Health = f2Health - f2DamageTaken;
             f1Health = f1Health - f1DamageTaken;
 
-            System.out.println("Round " + roundCount);
-            System.out.println(fighter1.name + "(F1) hits " + fighter2.name + "(F2) for " + f2DamageTaken + " points of damage");
-            System.out.println(fighter2.name + "(F1) hits " + fighter1.name + "(F2) for " + f1DamageTaken + " points of damage");
+            System.out.println("\nRound " + roundCount);
+            System.out.println(fighter1.name + " hits for " + f2DamageTaken + " points of damage");
+            System.out.println(fighter2.name + " hits for " + f1DamageTaken + " points of damage");
+            System.out.println(fighter1.name + " Remaining Health: " + f1Health);
+            System.out.println(fighter2.name + " Remaining Health: " + f2Health);
 
             if(f2Health <= 5 && !f1HalfHealth){
                 SignalMiddleToJester(fighter2);
@@ -57,24 +65,31 @@ public class Match {
 
 
 
-            if (f1Health <= 0 && f2Health <= 0){
+            if (f1Health <= 0 && f2Health > 0){
+                //TODO: Add jester comment about Fighter 2 being the winner
+                //System.out.println(fighter1.name + " wins this match");
+                winner = fighter2;
+                break;
+            }
+            else if (f1Health > 0 && f2Health <= 0){
+                //TODO: Add jester comment about Fighter 1 being the winner
+                //System.out.println(fighter2.name + " wins this match");
+                winner = fighter1;
+                break;
+            }
+            else if (f1Health <= 0 && f2Health <= 0){
                 //TODO: Add jester comment about both fighters being dead and starting over
+                System.out.println("Both fighters dead, restarting match");
+                System.out.println("Press Enter to continue");
+                try{System.in.read();}
+                catch(Exception e){}
                 tieCount++;
                 roundCount = 0;
                 f1Health = 10;
                 f2Health = 10;
                 f1HalfHealth = false;
                 f2HalfHealth = false;
-            }
-            else if (f1Health > 0 && f2Health <= 0){
-                //TODO: Add jester comment about Fighter 1 being the winner
-                winner = fighter1;
-                break;
-            }
-            else if (f1Health <= 0 && f2Health > 0){
-                //TODO: Add jester comment about Fighter 2 being the winner
-                winner = fighter2;
-                break;
+                tieStated = false;
             }
 
         }
