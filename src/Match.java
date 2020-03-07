@@ -62,11 +62,11 @@ public class Match {
             System.out.println(fighter1.name + " Remaining Health: " + f1Health);
             System.out.println(fighter2.name + " Remaining Health: " + f2Health);
 
-            if(f1Health <= 5 && !f1HalfHealth){
+            if(f1Health <= 5 && !f1HalfHealth && f2Health > 0 && f1Health > 0){
                 SignalMiddleToJester(fighter1);
                 f1HalfHealth = true;
             }
-            else if(f2Health <= 5 && !f2HalfHealth){
+            else if(f2Health <= 5 && !f2HalfHealth && f2Health > 0 && f1Health > 0){
                 SignalMiddleToJester(fighter2);
                 f2HalfHealth = true;
             }
@@ -90,7 +90,7 @@ public class Match {
             else if (f1Health <= 0 && f2Health <= 0){
                 //TODO: Add jester comment about both fighters being dead and starting over
                 jester.CommentOnTie();
-                System.out.println("Press Enter to continue");
+                System.out.println("Press Enter to continue \n");
                 try{System.in.read();}
                 catch(Exception e){}
                 tieCount++;

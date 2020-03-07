@@ -30,6 +30,8 @@ public class Tournament {
         semiFinal1.PlayMatch(false);
         semiFinal2.PlayMatch(false);
 
+        System.out.println("Final Stage \n");
+
         Match FinalMatch = new Match(semiFinal1.winner, semiFinal2.winner);
         FinalMatch.PlayMatch(true);
         winner = FinalMatch.winner;
