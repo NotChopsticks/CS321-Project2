@@ -27,12 +27,14 @@ public class Tournament {
         Match semiFinal1 = new Match(SemiFinalist2, SemiFinalist3);
         Match semiFinal2 = new Match(SemiFinalist1, wildCard);
 
-        semiFinal1.PlayMatch();
-        semiFinal2.PlayMatch();
+        semiFinal1.PlayMatch(false);
+        semiFinal2.PlayMatch(false);
 
         Match FinalMatch = new Match(semiFinal1.winner, semiFinal2.winner);
-        FinalMatch.PlayMatch();
+        FinalMatch.PlayMatch(true);
         winner = FinalMatch.winner;
+        //FinalMatch.jester.CommentOnEnd(winner, FinalMatch.expected, true);
+        
 
 //        Fighter longWeaponChampion = subTournaments.get(0).winner;
 //        Fighter mediumWeaponChampion = subTournaments.get(1).winner;

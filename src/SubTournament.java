@@ -73,7 +73,7 @@ public class SubTournament {
             int roundSize = matches.size();
             for (int j = 0; j < roundSize; j++) {
                 System.out.println("\nMatch " + (j+1) + ": " + matches.get(0).fighter1.name + " Vs. " + matches.get(0).fighter2.name);
-                matches.get(0).PlayMatch();  //
+                matches.get(0).PlayMatch(false);  //
                 combatants.add(matches.get(0).winner);
                 System.out.println(matches.get(0).winner.name + " wins match " + (j+1));
                 System.out.println("Press Enter to continue");

@@ -7,18 +7,23 @@ public class Match {
     int roundCount;
     //Boolean debug = true;
     int tieCount;
+    Fighter expected;
 
     public Match(Fighter f1, Fighter f2)
     {
        fighter1 = f1;
        fighter2 = f2;
-       jester = new Jester(f1, f2);
+       jester = new Jester();
        roundCount = 0;
        winner = null;
        tieCount = 0;
+       if((f1.strength + f1.speed + f1.reach) > (f2.strength + f2.speed + f2.reach))
+        expected = f1;
+        else
+        expected = f2;
     }
 
-    public void PlayMatch()
+    public void PlayMatch(boolean last)
     {
         // These are the function calls that will be used in every combat turn to get the
         // attack and defense performances for each fighter.
@@ -29,6 +34,8 @@ public class Match {
         boolean f1HalfHealth = false;
         boolean f2HalfHealth = false;
         boolean tieStated = false;
+        
+        jester.CommentOnStart(expected); 
 
         while(true) {
             if (!tieStated && tieCount > 0){
@@ -58,7 +65,7 @@ public class Match {
                 SignalMiddleToJester(fighter2);
                 f2HalfHealth = true;
             }
-            if(f1Health <= 5 && !f2HalfHealth){
+            else if(f1Health <= 5 && !f2HalfHealth){
                 SignalMiddleToJester(fighter1);
                 f1HalfHealth = true;
             }
@@ -69,17 +76,19 @@ public class Match {
                 //TODO: Add jester comment about Fighter 2 being the winner
                 //System.out.println(fighter1.name + " wins this match");
                 winner = fighter2;
+                jester.CommentOnEnd(winner, expected, last);
                 break;
             }
             else if (f1Health > 0 && f2Health <= 0){
                 //TODO: Add jester comment about Fighter 1 being the winner
                 //System.out.println(fighter2.name + " wins this match");
                 winner = fighter1;
+                jester.CommentOnEnd(winner, expected, last);
                 break;
             }
             else if (f1Health <= 0 && f2Health <= 0){
                 //TODO: Add jester comment about both fighters being dead and starting over
-                System.out.println("Both fighters dead, restarting match");
+                jester.CommentOnTie();
                 System.out.println("Press Enter to continue");
                 try{System.in.read();}
                 catch(Exception e){}
@@ -97,6 +106,6 @@ public class Match {
 
     private void SignalMiddleToJester(Fighter subject)
     {
-
+        jester.CommentOnMiddle(subject);
     }
 }

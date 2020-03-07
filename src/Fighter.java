@@ -9,7 +9,7 @@ public class Fighter {
 
     public Fighter()
     {
-
+        
     }
 
     public Fighter(int str, int rch, int spd, Weapon weap, String nm)
