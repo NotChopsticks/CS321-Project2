@@ -1,14 +1,36 @@
 public class Match {
-
+    /**
+     * One of two fighters in the match
+     */
     Fighter fighter1;
+    /**
+     * The other fighter in the match
+     */
     Fighter fighter2;
+    /**
+     * The jester that will comment on the match
+     */
     Jester jester;
+    /**
+     * The fighter object that stores the winner of the match
+     */
     Fighter winner;
+    /**
+     * Number of rounds
+     */
     int roundCount;
-    //Boolean debug = true;
+    /**
+     * Number of ties that have occurred 
+     */
     int tieCount;
+    /**
+     * The expected winner of the match
+     */
     Fighter expected;
 
+    /**
+     * constructor for the match
+     */
     public Match(Fighter f1, Fighter f2)
     {
        fighter1 = f1;
@@ -23,12 +45,13 @@ public class Match {
         expected = f2;
     }
 
+    /**
+     * method that plays one match of two fighters
+     * uses method calls from other classes to play the match
+     * @param last
+     */
     public void PlayMatch(boolean last)
     {
-        // These are the function calls that will be used in every combat turn to get the
-        // attack and defense performances for each fighter.
-        // Figured I'd include these cause they're long and there's a lot of 
-        // parentheses.
         int f1Health = 10;
         int f2Health = 10;
         boolean f1HalfHealth = false;
@@ -105,6 +128,10 @@ public class Match {
         }
     }
 
+    /**
+     * Signals that a fighter has dropped below half of their health
+     * @param subject
+     */
     private void SignalMiddleToJester(Fighter subject)
     {
         jester.CommentOnMiddle(subject);

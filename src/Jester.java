@@ -1,10 +1,18 @@
 import java.util.Random;
 
+/**
+ * Represents the jester that comments on the match as it progresses
+ * reacts to start, end, middle, and various other parts of the match
+ */
 public class Jester {
 
     public Jester() {
     }
 
+    /**
+     * prints the expected winner of the match
+     * @param expected
+     */
     public void CommentOnStart(Fighter expected) {
         Random rand = new Random();
         int response;
@@ -18,7 +26,7 @@ public class Jester {
         System.out.println("My money's on " + expected.name + "! But hey let's have a good clean match! \n");
         break;
         case 2:
-        System.out.println("Wow! " + expected.name + "Looks like the clear winner to me! \n");
+        System.out.println("Wow! " + expected.name + " looks like the clear winner to me! \n");
         break;
         case 3:
         System.out.println("Here come the fighters and Oh! " + expected.name + " has already got this match in the bag, I can tell! \n");
@@ -26,6 +34,10 @@ public class Jester {
         }
     }
 
+    /**
+     * prints a message when one of the fighters gets below half health
+     * @param subject
+     */
     public void CommentOnMiddle(Fighter subject) {
         Random rand = new Random();
         int response;
@@ -47,6 +59,13 @@ public class Jester {
         }
     }
 
+    /**
+     * prints a victory message when a fighter wins
+     * varies on whether or not it's the final match of the tournament and whether the match had an upset
+     * @param winner
+     * @param expected
+     * @param last
+     */
     public void CommentOnEnd(Fighter winner, Fighter expected, boolean last) {
         if(winner == expected) {
             if(last) {
@@ -122,6 +141,9 @@ public class Jester {
         }
     }
 
+    /**
+     * prints a message if both fighters lose 10 or more health
+     */
     public void CommentOnTie() {
         Random rand = new Random();
         int response;
