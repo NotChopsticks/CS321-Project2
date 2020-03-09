@@ -1,34 +1,65 @@
 public class Match {
-
+    /**
+     * One of two fighters in the match
+     */
     Fighter fighter1;
+    /**
+     * The other fighter in the match
+     */
     Fighter fighter2;
+    /**
+     * The jester that will comment on the match
+     */
     Jester jester;
+    /**
+     * The fighter object that stores the winner of the match
+     */
     Fighter winner;
+    /**
+     * Number of rounds
+     */
     int roundCount;
-    //Boolean debug = true;
+    /**
+     * Number of ties that have occurred 
+     */
     int tieCount;
+    /**
+     * The expected winner of the match
+     */
+    Fighter expected;
 
+    /**
+     * constructor for the match
+     */
     public Match(Fighter f1, Fighter f2)
     {
        fighter1 = f1;
        fighter2 = f2;
-       jester = new Jester(f1, f2);
+       jester = new Jester();
        roundCount = 0;
        winner = null;
        tieCount = 0;
+       if((f1.strength + f1.speed + f1.reach) > (f2.strength + f2.speed + f2.reach))
+        expected = f1;
+        else
+        expected = f2;
     }
 
-    public void PlayMatch()
+    /**
+     * method that plays one match of two fighters
+     * uses method calls from other classes to play the match
+     * @param last
+     */
+    public void PlayMatch(boolean last)
     {
-        // These are the function calls that will be used in every combat turn to get the
-        // attack and defense performances for each fighter.
-        // Figured I'd include these cause they're long and there's a lot of 
-        // parentheses.
         int f1Health = 10;
         int f2Health = 10;
         boolean f1HalfHealth = false;
         boolean f2HalfHealth = false;
         boolean tieStated = false;
+        jester = new Jester();
+        
+        jester.CommentOnStart(expected); 
 
         while(true) {
             if (!tieStated && tieCount > 0){
@@ -54,13 +85,13 @@ public class Match {
             System.out.println(fighter1.name + " Remaining Health: " + f1Health);
             System.out.println(fighter2.name + " Remaining Health: " + f2Health);
 
-            if(f2Health <= 5 && !f1HalfHealth){
-                SignalMiddleToJester(fighter2);
-                f2HalfHealth = true;
-            }
-            if(f1Health <= 5 && !f2HalfHealth){
+            if(f1Health <= 5 && !f1HalfHealth && f2Health > 0 && f1Health > 0){
                 SignalMiddleToJester(fighter1);
                 f1HalfHealth = true;
+            }
+            else if(f2Health <= 5 && !f2HalfHealth && f2Health > 0 && f1Health > 0){
+                SignalMiddleToJester(fighter2);
+                f2HalfHealth = true;
             }
 
 
@@ -69,18 +100,20 @@ public class Match {
                 //TODO: Add jester comment about Fighter 2 being the winner
                 //System.out.println(fighter1.name + " wins this match");
                 winner = fighter2;
+                jester.CommentOnEnd(winner, expected, last);
                 break;
             }
             else if (f1Health > 0 && f2Health <= 0){
                 //TODO: Add jester comment about Fighter 1 being the winner
                 //System.out.println(fighter2.name + " wins this match");
                 winner = fighter1;
+                jester.CommentOnEnd(winner, expected, last);
                 break;
             }
             else if (f1Health <= 0 && f2Health <= 0){
                 //TODO: Add jester comment about both fighters being dead and starting over
-                System.out.println("Both fighters dead, restarting match");
-                System.out.println("Press Enter to continue");
+                jester.CommentOnTie();
+                System.out.println("Press Enter to continue \n");
                 try{System.in.read();}
                 catch(Exception e){}
                 tieCount++;
@@ -95,8 +128,12 @@ public class Match {
         }
     }
 
+    /**
+     * Signals that a fighter has dropped below half of their health
+     * @param subject
+     */
     private void SignalMiddleToJester(Fighter subject)
     {
-
+        jester.CommentOnMiddle(subject);
     }
 }

@@ -2,10 +2,22 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * The tournament that invokes subtournaments to determine winners to fight in semifinals and final rounds
+ * All to determine one winner of the tournament overall
+ */
 public class Tournament {
-
+    /**
+     * List of subtournaments in the tournament
+     */
     List<SubTournament> subTournaments = new ArrayList<>();
+    /**
+     * Random object for matchmaking
+     */
     Random matchMaker = new Random();
+    /**
+     * Fighter object that will contain the winner of the tournament
+     */
     Fighter winner = null;
 
 
@@ -13,6 +25,10 @@ public class Tournament {
 
     }
 
+    /**
+     * Determines the winner of the tournament by playing subtournaments and then having
+     * the winners of those fight in semifinal matches and then a final match
+     */
     public void DetermineWinner() {
         for (SubTournament subBracket : subTournaments) {
             subBracket.DetermineWinner();
@@ -27,25 +43,23 @@ public class Tournament {
         Match semiFinal1 = new Match(SemiFinalist2, SemiFinalist3);
         Match semiFinal2 = new Match(SemiFinalist1, wildCard);
 
-        semiFinal1.PlayMatch();
-        semiFinal2.PlayMatch();
+        semiFinal1.PlayMatch(false);
+        semiFinal2.PlayMatch(false);
+
+        System.out.println("Final Stage \n");
 
         Match FinalMatch = new Match(semiFinal1.winner, semiFinal2.winner);
-        FinalMatch.PlayMatch();
+        FinalMatch.PlayMatch(true);
         winner = FinalMatch.winner;
-
-//        Fighter longWeaponChampion = subTournaments.get(0).winner;
-//        Fighter mediumWeaponChampion = subTournaments.get(1).winner;
-//        Fighter shortWeaponChampion = subTournaments.get(2).winner;
-//        Fighter wildWeaponChampion = subTournaments.get(3).winner;
-
     }
 
+    /**
+     * Sets starting values and internal state of the tournament
+     */
     public void InitializeTournament(int rounds) {
         for (TournamentArchetype type : TournamentArchetype.values()){
             SubTournament temp = new SubTournament(rounds, type);
-            //temp.archetype = type;
-            subTournaments.add(temp); //TODO:
+            subTournaments.add(temp);
         }
     }
 
